@@ -75,7 +75,7 @@
 <div align="center">
 
 ### Portfolio
-<a href="https://github.com/Eduardo-Salvador/To_Do-Java">To Do Java and Python</a>
+<a href="https://github.com/Eduardo-Salvador/To_Do-Java">Automatic To Do Java and Python</a>
 <br><a href="https://github.com/Eduardo-Salvador/ABAP-CRUD">ABAP CRUD</a>
 <br><a href="https://github.com/Eduardo-Salvador/To_Do-PHP">To Do PHP</a>
 
@@ -86,7 +86,7 @@
 
 ### Study Projects
 <a href="https://github.com/Eduardo-Salvador/Java-Training">Java Training</a>
-<br><a href="https://github.com/Eduardo-Salvador/SQL-Training-HR-Analytics">SQL Training - HR Analytics</a>
+<br><a href="https://github.com/Eduardo-Salvador/SQL-Training-HR-Analytics">PostgreSQL Training</a>
 
 </td>
 <td valign="top">
@@ -94,8 +94,8 @@
 <div align="center">
 
 ### Data Structures
-<a href="https://github.com/Eduardo-Salvador/Data_Structure-in-Java">Data Structures in Java</a>
-<br><a href="https://github.com/Eduardo-Salvador/Data_Structure-in-C">Data Structures in C</a>
+<a href="https://github.com/Eduardo-Salvador/Data_Structure-in-Java">Advanced Data Structures in Java</a>
+<br><a href="https://github.com/Eduardo-Salvador/Data_Structure-in-C">Simple Data Structures in C</a>
 
 </td>
 </tr>

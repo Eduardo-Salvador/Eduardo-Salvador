@@ -1,42 +1,40 @@
+## About me:
+
+- I am a software engineer at @Bosch Digital
+- Residing in Brazil.
+- Completely obsessed with technologies and high-performance solutions.
+- I love reading books, especially technical ones and those about psychology.
+
 <div align="center">
-<img align="center" height="150" src="https://i.redd.it/qqz6xs0kbvze1.gif">
-
-### About me:
-
-I am a software engineer residing in Brazil.
-
-Completely obsessed with technologies and high-performance solutions.
-
-I love reading books, especially technical ones and those about psychology.
-
-</div>
 
 ###
 
-<div align="center">
 <a href="https://www.linkedin.com/in/eduardo-salvador-306480218/" target="_blank">
   <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&style=for-the-badge" height="25" alt="linkedin logo" />
 </a>
 
-### My Stack:
 </div>
 
+## Techs:
+
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=java" height="60" alt="typescript logo"  />
+  <img src="https://skillicons.dev/icons?i=java" height="60" alt="java logo"  />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=spring" height="60" alt="nextjs logo"  />
+  <img src="https://skillicons.dev/icons?i=spring" height="60" alt="spring logo"  />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=maven" height="60" alt="tailwindcss logo"  />
+  <img src="https://skillicons.dev/icons?i=docker" height="60" alt="docker logo"  />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=postgres" height="60" alt="graphql logo"  />
+  <img src="https://skillicons.dev/icons?i=maven" height="60" alt="maven logo"  />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=mysql" height="60" alt="go logo"  />
+  <img src="https://skillicons.dev/icons?i=postgres" height="60" alt="postgres logo"  />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=mysql" height="60" alt="mysql logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=py" height="60" alt="python logo"  />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=git" height="60" alt="rust logo"  />
+  <img src="https://skillicons.dev/icons?i=git" height="60" alt="git logo"  />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=github" height="60" alt="nestjs logo"  />
+  <img src="https://skillicons.dev/icons?i=github" height="60" alt="github logo"  />
   <img width="12" />
 
 
@@ -54,33 +52,50 @@ I love reading books, especially technical ones and those about psychology.
   <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/eduardo-salvador/eduardo-salvador/output/pacman-contribution-graph.svg">
 </picture>
 
-### My Projects:
+</div>
 
-<a href="https://github.com/Eduardo-Salvador?tab=repositories">All Repositories</a>
+## My Projects: 
+
+<div align="center">
+
+### <a href="https://github.com/Eduardo-Salvador?tab=repositories">All Repositories</a>
 
 <table>
 <tr>
 <td valign="top">
-
-### APIs / Backend Projects
-<a href="https://github.com/Eduardo-Salvador/API_REST-Java-SpringBoot">RESTful API built with Spring Boot</a>
-<br></br>
-
-### Portfolio Projects
-<a href="https://github.com/Eduardo-Salvador/To_Do-Java">Automatic To Do Java and Python</a>  
-<a href="https://github.com/Eduardo-Salvador/ABAP-CRUD">ABAP CRUD</a>  
-<a href="https://github.com/Eduardo-Salvador/To_Do-PHP">To Do PHP</a>  
+  
+<div align="center">
+  
+### APIs / Backend
+<a href="https://github.com/Eduardo-Salvador/API_REST-Java-SpringBoot">RESTful API - Spring Boot</a>
 
 </td>
 <td valign="top">
 
+<div align="center">
+
+### Portfolio
+<a href="https://github.com/Eduardo-Salvador/To_Do-Java">To Do Java and Python</a>
+<br><a href="https://github.com/Eduardo-Salvador/ABAP-CRUD">ABAP CRUD</a>
+<br><a href="https://github.com/Eduardo-Salvador/To_Do-PHP">To Do PHP</a>
+
+</td>
+<td valign="top">
+
+<div align="center">
+
 ### Study Projects
-<a href="https://github.com/Eduardo-Salvador/Java-Training">Java Training</a>  
-<a href="https://github.com/Eduardo-Salvador/SQL-Training-HR-Analytics">SQL Training - HR Analytics - PostgreSQL</a>  
+<a href="https://github.com/Eduardo-Salvador/Java-Training">Java Training</a>
+<br><a href="https://github.com/Eduardo-Salvador/SQL-Training-HR-Analytics">SQL Training - HR Analytics</a>
+
+</td>
+<td valign="top">
+
+<div align="center">
 
 ### Data Structures
-<a href="https://github.com/Eduardo-Salvador/Data_Structure-in-Java">Data Structures in Java</a>  
-<a href="https://github.com/Eduardo-Salvador/Data_Structure-in-C">Data Structures in C</a>  
+<a href="https://github.com/Eduardo-Salvador/Data_Structure-in-Java">Data Structures in Java</a>
+<br><a href="https://github.com/Eduardo-Salvador/Data_Structure-in-C">Data Structures in C</a>
 
 </td>
 </tr>

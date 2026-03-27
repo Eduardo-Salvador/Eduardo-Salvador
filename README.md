@@ -1,8 +1,7 @@
 <div align="center">
-<img align="center" height="225" src="https://i.redd.it/qqz6xs0kbvze1.gif">
+<img align="center" height="150" src="https://i.redd.it/qqz6xs0kbvze1.gif">
 
-
-### About me
+### About me:
 
 I am a software engineer residing in Brazil.
 
@@ -55,140 +54,35 @@ I love reading books, especially technical ones and those about psychology.
   <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/eduardo-salvador/eduardo-salvador/output/pacman-contribution-graph.svg">
 </picture>
 
-### My Projects
+### My Projects:
+
+<a href="https://github.com/Eduardo-Salvador?tab=repositories">All Repositories</a>
 
 <table>
-  <tr>
-    <td width="50%" valign="top" style="border:1px solid #30363d; border-radius:10px; padding:15px;">
-      <div align="center">
-        <h3>Repositories</h3>
-        <p>Overview of all repositories and experiments.</p>
-        <a href="https://github.com/Eduardo-Salvador?tab=repositories">Access</a>
-      </div>
-    </td>
-  </tr>
-</table>
+<tr>
+<td valign="top">
 
 ### APIs / Backend Projects
-
-<table>
-  <tr>
-    <td width="50%" valign="top" style="border:1px solid #30363d; border-radius:10px; padding:15px;">
-      <div align="center">
-      <h3>API REST Java Spring Boot</h3>
-      <p>RESTful API built with Spring Boot.</p>
-      <p>
-        <img src="https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=java&logoColor=white"/>
-        <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
-      </p>
-      <a href="https://github.com/Eduardo-Salvador/API_REST-Java-SpringBoot">API REST Java Spring Boot Repository</a>
-    </td>
-    </div>
-  </tr>
-</table>
+<a href="https://github.com/Eduardo-Salvador/API_REST-Java-SpringBoot">RESTful API built with Spring Boot</a>
+<br></br>
 
 ### Portfolio Projects
+<a href="https://github.com/Eduardo-Salvador/To_Do-Java">Automatic To Do Java and Python</a>  
+<a href="https://github.com/Eduardo-Salvador/ABAP-CRUD">ABAP CRUD</a>  
+<a href="https://github.com/Eduardo-Salvador/To_Do-PHP">To Do PHP</a>  
 
-<table>
-  <tr>
-    <td width="50%" valign="top" style="border:1px solid #30363d; border-radius:10px; padding:15px;">
-      <div align="center">
-      <h3>Automatic To Do Java</h3>
-      <p>Task management system built with Java and Python.</p>
-      <p>
-        <img src="https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=java&logoColor=white"/>
-        <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/>
-      </p>
-      <a href="https://github.com/Eduardo-Salvador/To_Do-Java">Automatic To Do Java Repository</a>
-      </div>
-    </td>
-    <td width="50%" valign="top" style="border:1px solid #30363d; border-radius:10px; padding:15px;">
-      <div align="center">
-      <h3>ABAP CRUD</h3>
-      <p>CRUD system developed in ABAP for SAP environments.</p>
-      <p>
-        <img src="https://img.shields.io/badge/ABAP-0FAAFF?style=flat-square"/>
-        <img src="https://img.shields.io/badge/SAP-0FAAFF?style=flat-square&logo=sap&logoColor=white"/>
-      </p>
-      <a href="https://github.com/Eduardo-Salvador/ABAP-CRUD">ABAP CRUD Repository</a>
-    </td>
-    </div>
-  </tr>
-
-  <tr>
-    <td width="50%" valign="top" style="border:1px solid #30363d; border-radius:10px; padding:15px;">
-      <div align="center">
-      <h3>To Do PHP</h3>
-      <p>Task management system built with PHP.</p>
-      <p>
-        <img src="https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white"/>
-      </p>
-      <a href="https://github.com/Eduardo-Salvador/To_Do-PHP">To Do PHP Repository</a>
-    </td>
-    </div>
-  </tr>
-</table>
+</td>
+<td valign="top">
 
 ### Study Projects
+<a href="https://github.com/Eduardo-Salvador/Java-Training">Java Training</a>  
+<a href="https://github.com/Eduardo-Salvador/SQL-Training-HR-Analytics">SQL Training - HR Analytics - PostgreSQL</a>  
 
-#### Java
+### Data Structures
+<a href="https://github.com/Eduardo-Salvador/Data_Structure-in-Java">Data Structures in Java</a>  
+<a href="https://github.com/Eduardo-Salvador/Data_Structure-in-C">Data Structures in C</a>  
 
-<table>
-  <tr>
-    <td width="50%" valign="top" style="border:1px solid #30363d; border-radius:10px; padding:15px;">
-      <div align="center">
-      <h3>Java Training</h3>
-      <p>Java fundamentals and OOP practice.</p>
-      <p>
-        <img src="https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=java&logoColor=white"/>
-      </p>
-      <a href="https://github.com/Eduardo-Salvador/Java-Training">Java Training Repository</a>
-    </td>
-    </div>
-  </tr>
+</td>
+</tr>
 </table>
-
-#### Databases / SQL
-
-<table>
-  <tr>
-    <td width="50%" valign="top" style="border:1px solid #30363d; border-radius:10px; padding:15px;">
-      <div align="center">
-      <h3>SQL Training - HR Analytics</h3>
-      <p>SQL exercises and analytics using PostgreSQL.</p>
-      <p>
-        <img src="https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white"/>
-      </p>
-      <a href="https://github.com/Eduardo-Salvador/SQL-Training-HR-Analytics">SQL Training Repository</a>
-    </td>
-    </div>
-  </tr>
-</table>
-
-
-#### Data Structures
-
-<table>
-  <tr>
-    <td width="50%" valign="top" style="border:1px solid #30363d; border-radius:10px; padding:15px;">
-      <div align="center">
-      <h3>Data Structures in Java</h3>
-      <p>Implementation of data structures in Java.</p>
-      <p>
-        <img src="https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=java&logoColor=white"/>
-      </p>
-      <a href="https://github.com/Eduardo-Salvador/Data_Structure-in-Java">Data Structures in Java Repository</a>
-      </div>
-    </td>
-    <td width="50%" valign="top" style="border:1px solid #30363d; border-radius:10px; padding:15px;">
-      <div align="center">
-      <h3>Data Structures in C</h3>
-      <p>Implementation of basic data structures using C.</p>
-      <p>
-        <img src="https://img.shields.io/badge/C-A8B9CC?style=flat-square&logo=c&logoColor=white"/>
-      </p>
-      <a href="https://github.com/Eduardo-Salvador/Data_Structure-in-C">Data Structures in C Repository</a>
-      </div>
-    </td>
-  </tr>
-</table>
+</div>

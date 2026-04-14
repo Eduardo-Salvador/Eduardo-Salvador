@@ -67,7 +67,7 @@
 <div align="center">
   
 ### APIs / Backend
-<a href="https://github.com/Eduardo-Salvador/API_REST-Java-SpringBoot">RESTful API - Spring Boot</a>
+<a href="https://github.com/Eduardo-Salvador/Products-RESTful-API-SpringBoot">Products RESTful API - Spring Boot</a>
 
 </td>
 <td valign="top">

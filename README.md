@@ -75,7 +75,7 @@
 <div align="center">
 
 ### Portfolio
-<a href="https://github.com/Eduardo-Salvador/To_Do-Java">Automatic To Do Java and Python</a>  
+<a href="https://github.com/Eduardo-Salvador/To_Do-Java">Java Automatic Data generator and Python Automatic Data consumer using PostgreSQL</a>  
 <br><a href="https://github.com/Eduardo-Salvador/ABAP-CRUD">ABAP CRUD</a>  
 <br><a href="https://github.com/Eduardo-Salvador/To_Do-PHP">To Do PHP</a>
 

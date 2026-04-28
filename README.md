@@ -75,7 +75,7 @@
 <div align="center">
 
 ### Portfolio
-<br><a href="https://github.com/Eduardo-Salvador/ABAP-CRUD">ABAP CRUD</a>  
+<a href="https://github.com/Eduardo-Salvador/ABAP-CRUD">ABAP CRUD</a>  
 <br><a href="https://github.com/Eduardo-Salvador/To_Do-PHP">To Do PHP</a>
 
 </td>
@@ -84,7 +84,7 @@
 <div align="center">
 
 ### Study Projects
-<a href="https://github.com/Eduardo-Salvador/Java-Training">Advanced Ecossystem Java Training</a>  
+<a href="https://github.com/Eduardo-Salvador/Java-Training">Advanced Ecossystem Java Training</a>
 <br><a href="https://github.com/Eduardo-Salvador/SQL-Training-HR-Analytics">Advanced PostgreSQL Training</a>
 
 </td>

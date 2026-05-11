@@ -92,7 +92,7 @@
 
 <div align="center">
 
-### Data Structures
+### Data Structures and Algorithms
 <a href="https://github.com/Eduardo-Salvador/Data_Structure-in-Java">Complete Data Structures and High Level Alghortims Project in Java</a>  
 <br><a href="https://github.com/Eduardo-Salvador/Data_Structure-in-C">Simple Data Structures in C for understand Pointers</a>
 

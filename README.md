@@ -22,9 +22,15 @@
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=spring" height="60" alt="spring logo"  />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=docker" height="60" alt="docker logo"  />
-  <img width="12" />
   <img src="https://skillicons.dev/icons?i=maven" height="60" alt="maven logo"  />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=angular" height="60" alt="angular logo"  />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=ts" height="60" alt="typescript logo"  />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=js" height="60" alt="javascript logo"  />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=docker" height="60" alt="docker logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=postgres" height="60" alt="postgres logo"  />
   <img width="12" />
@@ -38,6 +44,7 @@
   <img width="12" />
 
 
+
 ###
 
 <div align="center">
@@ -46,26 +53,28 @@
 
 ###
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/eduardo-salvador/eduardo-salvador/output/pacman-contribution-graph-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/eduardo-salvador/eduardo-salvador/output/pacman-contribution-graph.svg">
-  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/eduardo-salvador/eduardo-salvador/output/pacman-contribution-graph.svg">
-</picture>
+
 
 </div>
 
-## My Projects: 
-
-<div align="center">
-
-### <a href="https://github.com/Eduardo-Salvador?tab=repositories">All Repositories</a>
+## <a href="https://github.com/Eduardo-Salvador?tab=repositories">My Projects</a> 
 
 <table>
 <tr>
 <td valign="top">
   
 <div align="center">
+
+### Full Stack
+<a href="https:www.jogadoresanonimos.com.br">Prod Web - Jogadores Anonimos</a>  
+<br><a href="https:www.dioliconfeitaria.com.br">Prod Web - Dioli Confeitaria</a>  
+<br><a href="xxx">Web - eCommerce</a>
+
+</td>
+<td valign="top">
   
+<div align="center">
+
 ### APIs / Backend
 <a href="https://github.com/Eduardo-Salvador/Products-RESTful-API-SpringBoot">Products RESTful API - Spring Boot</a>
 
@@ -76,7 +85,7 @@
 
 ### Portfolio
 <a href="https://github.com/Eduardo-Salvador/ABAP-CRUD">ABAP CRUD</a>  
-<br><a href="https://github.com/Eduardo-Salvador/To_Do-PHP">To Do PHP</a>
+<br><a href="https://github.com/Eduardo-Salvador/To_Do-PHP">To Do PHP</a>  
 
 </td>
 <td valign="top">
@@ -100,3 +109,9 @@
 </tr>
 </table>
 </div>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/eduardo-salvador/eduardo-salvador/output/pacman-contribution-graph-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/eduardo-salvador/eduardo-salvador/output/pacman-contribution-graph.svg">
+  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/eduardo-salvador/eduardo-salvador/output/pacman-contribution-graph.svg">
+</picture>

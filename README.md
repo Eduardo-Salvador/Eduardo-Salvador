@@ -1,9 +1,11 @@
 ## About me:
 
-- I am a software engineer at @Bosch Digital
-- Residing in Brazil.
-- Completely obsessed with technologies and high-performance solutions.
-- I love reading books, especially technical ones and those about psychology.
+- I am a Software Engineer at @Bosch Digital.
+- Based in Brazil.
+- Full Stack Developer focused on scalable, high-performance solutions.
+- Exploring **AI Engineering, Agentic Systems, and AI Harness Engineering**, building tools and architectures that make AI agents more reliable, efficient, and useful in real software projects.
+- Completely obsessed with technology, software architecture, automation, and performance.
+- I love reading books, especially technical ones and books about psychology.
 
 <div align="center">
 
@@ -43,72 +45,26 @@
   <img src="https://skillicons.dev/icons?i=github" height="60" alt="github logo"  />
   <img width="12" />
 
-
-
-###
-
-<div align="center">
- <img src="https://streak-stats.demolab.com?user=eduardo-salvador&theme=dark&hide_border=false&border_radius=5&ring=58a6ff&fire=58a6ff&currStreakLabel=58a6ff&sideLabels=c9d1d9&dates=8b949e" height="150" />
 </div>
 
-###
+## AI Engineering:
 
+<div align="center">
+
+<img src="https://img.shields.io/badge/AI%20Engineering-000000?style=for-the-badge&logo=openai&logoColor=white" />
+<img src="https://img.shields.io/badge/Agentic%20AI-412991?style=for-the-badge&logo=openai&logoColor=white" />
+<img src="https://img.shields.io/badge/AI%20Harness%20Engineering-1f6feb?style=for-the-badge&logo=githubcopilot&logoColor=white" />
+<img src="https://img.shields.io/badge/LLM%20Applications-111827?style=for-the-badge&logo=openai&logoColor=white" />
+<img src="https://img.shields.io/badge/RAG-FF6F00?style=for-the-badge&logo=databricks&logoColor=white" />
+<img src="https://img.shields.io/badge/Multi--Agent%20Systems-2496ED?style=for-the-badge&logo=dependabot&logoColor=white" />
+<img src="https://img.shields.io/badge/Prompt%20Engineering-10A37F?style=for-the-badge&logo=openai&logoColor=white" />
+
+</div>
 
 
 </div>
 
-## <a href="https://github.com/Eduardo-Salvador?tab=repositories">My Projects</a> 
-
-<table>
-<tr>
-<td valign="top">
-  
-<div align="center">
-
-### Full Stack
-<a href="https:www.jogadoresanonimos.com.br">Prod Web - Jogadores Anonimos</a>  
-<br><a href="https:www.dioliconfeitaria.com.br">Prod Web - Dioli Confeitaria</a>  
-<br><a href="xxx">Web - eCommerce</a>
-
-</td>
-<td valign="top">
-  
-<div align="center">
-
-### APIs / Backend
-<a href="https://github.com/Eduardo-Salvador/Products-RESTful-API-SpringBoot">Products RESTful API - Spring Boot</a>
-
-</td>
-<td valign="top">
-
-<div align="center">
-
-### Portfolio
-<a href="https://github.com/Eduardo-Salvador/ABAP-CRUD">ABAP CRUD</a>  
-<br><a href="https://github.com/Eduardo-Salvador/To_Do-PHP">To Do PHP</a>  
-
-</td>
-<td valign="top">
-
-<div align="center">
-
-### Study Projects
-<a href="https://github.com/Eduardo-Salvador/Java-Training">Advanced Ecossystem Java Training</a>
-<br><a href="https://github.com/Eduardo-Salvador/SQL-Training-HR-Analytics">Advanced PostgreSQL Training</a>
-
-</td>
-<td valign="top">
-
-<div align="center">
-
-### Data Structures and Algorithms
-<a href="https://github.com/Eduardo-Salvador/Data_Structure-in-Java">Complete Data Structures and High Level Alghortims Project in Java</a>  
-<br><a href="https://github.com/Eduardo-Salvador/Data_Structure-in-C">Simple Data Structures in C for understand Pointers</a>
-
-</td>
-</tr>
-</table>
-</div>
+---
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/eduardo-salvador/eduardo-salvador/output/pacman-contribution-graph-dark.svg">

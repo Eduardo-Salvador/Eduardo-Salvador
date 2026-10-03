@@ -1,6 +1,6 @@
 ## About me:
 
-- I am a Software Engineer at @Bosch Digital and Founder of @UseCorvo
+- I`m a Software Engineer at @Bosch Digital, @Hydra and Founder of @UseCorvo
 - Based in Brazil.
 - Full Stack Developer focused on scalable, high-performance solutions.
 - Exploring **AI Engineering, Agentic Systems, and AI Harness Engineering**, building tools and architectures that make AI agents more reliable, efficient, and useful in real software projects.

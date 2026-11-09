@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="985" height="215" font-family="ConsolasFallback,Consolas,monospace">
 <rect width="985" height="215" rx="12" fill="#161b22"/>
-<text x="18" y="26" fill="#c9d1d9" font-size="14">1,461 contributions in the last year</text>
+<text x="18" y="26" fill="#c9d1d9" font-size="14">1,462 contributions in the last year</text>
 <text x="52" y="50" fill="#8b949e" font-size="11">Nov</text>
 <text x="120" y="50" fill="#8b949e" font-size="11">Dec</text>
 <text x="188" y="50" fill="#8b949e" font-size="11">Jan</text>
@@ -259,8 +259,8 @@
 <rect x="630" y="92" width="13" height="13" rx="3" fill="#282d34"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.61749;0.61754;1" dur="19.47s" repeatCount="indefinite"/></rect>
 <rect x="630" y="109" width="13" height="13" rx="3" fill="#282d34"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.61980;0.61985;1" dur="19.47s" repeatCount="indefinite"/></rect>
 <rect x="630" y="126" width="13" height="13" rx="3" fill="#4c5259"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.62211;0.62216;1" dur="19.47s" repeatCount="indefinite"/></rect>
-<rect x="630" y="143" width="13" height="13" rx="3" fill="#4c5259"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.62442;0.62447;1" dur="19.47s" repeatCount="indefinite"/></rect>
-<rect x="630" y="160" width="13" height="13" rx="3" fill="#282d34"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.62673;0.62678;1" dur="19.47s" repeatCount="indefinite"/></rect>
+<rect x="630" y="143" width="13" height="13" rx="3" fill="#282d34"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.62442;0.62447;1" dur="19.47s" repeatCount="indefinite"/></rect>
+<rect x="630" y="160" width="13" height="13" rx="3" fill="#4c5259"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.62673;0.62678;1" dur="19.47s" repeatCount="indefinite"/></rect>
 <rect x="647" y="160" width="13" height="13" rx="3" fill="#4c5259"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.62904;0.62910;1" dur="19.47s" repeatCount="indefinite"/></rect>
 <rect x="647" y="143" width="13" height="13" rx="3" fill="#4c5259"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.63136;0.63141;1" dur="19.47s" repeatCount="indefinite"/></rect>
 <rect x="647" y="126" width="13" height="13" rx="3" fill="#4c5259"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.63367;0.63372;1" dur="19.47s" repeatCount="indefinite"/></rect>
@@ -354,8 +354,8 @@
 <rect x="851" y="58" width="13" height="13" rx="3" fill="#4c5259"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.83706;0.83711;1" dur="19.47s" repeatCount="indefinite"/></rect>
 <rect x="868" y="58" width="13" height="13" rx="3" fill="#4c5259"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.83937;0.83942;1" dur="19.47s" repeatCount="indefinite"/></rect>
 <rect x="868" y="75" width="13" height="13" rx="3" fill="#70767e"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.84168;0.84173;1" dur="19.47s" repeatCount="indefinite"/></rect>
-<rect x="868" y="92" width="13" height="13" rx="3" fill="#979ea6"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.84399;0.84404;1" dur="19.47s" repeatCount="indefinite"/></rect>
-<rect x="868" y="109" width="13" height="13" rx="3" fill="#4c5259"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.84630;0.84635;1" dur="19.47s" repeatCount="indefinite"/></rect>
+<rect x="868" y="92" width="13" height="13" rx="3" fill="#70767e"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.84399;0.84404;1" dur="19.47s" repeatCount="indefinite"/></rect>
+<rect x="868" y="109" width="13" height="13" rx="3" fill="#70767e"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.84630;0.84635;1" dur="19.47s" repeatCount="indefinite"/></rect>
 <rect x="868" y="126" width="13" height="13" rx="3" fill="#70767e"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.84861;0.84866;1" dur="19.47s" repeatCount="indefinite"/></rect>
 <rect x="868" y="143" width="13" height="13" rx="3" fill="#282d34"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.85092;0.85098;1" dur="19.47s" repeatCount="indefinite"/></rect>
 <rect x="868" y="160" width="13" height="13" rx="3" fill="#4c5259"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.85324;0.85329;1" dur="19.47s" repeatCount="indefinite"/></rect>

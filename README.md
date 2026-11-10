@@ -1,4 +1,9 @@
 <p align="center">
+  <a href="https://salvadordev.com.br"><picture><source media="(prefers-color-scheme: dark)" srcset="link_portfolio_dark.svg"><img alt="Portfolio" src="link_portfolio_light.svg" width="40%"></picture></a>
+  <a href="https://www.linkedin.com/in/eduardo-salvador-306480218/"><picture><source media="(prefers-color-scheme: dark)" srcset="link_linkedin_dark.svg"><img alt="LinkedIn" src="link_linkedin_light.svg" width="40%"></picture></a>
+</p>
+
+<p align="center">
   <a href="https://salvadordev.com.br">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg">
@@ -8,8 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="https://salvadordev.com.br"><picture><source media="(prefers-color-scheme: dark)" srcset="link_portfolio_dark.svg"><img alt="Portfolio" src="link_portfolio_light.svg" width="40%"></picture></a>
-  <a href="https://www.linkedin.com/in/eduardo-salvador-306480218/"><picture><source media="(prefers-color-scheme: dark)" srcset="link_linkedin_dark.svg"><img alt="LinkedIn" src="link_linkedin_light.svg" width="40%"></picture></a>
+  <img src="https://skillicons.dev/icons?i=java,kotlin,spring,maven,angular,androidstudio,nodejs,py,postgres,mysql,mongodb,docker,git,github&theme=dark" alt="Tech stack" />
 </p>
 
 <p align="center">

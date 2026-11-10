@@ -1,7 +1,8 @@
 """Renders the contribution calendar as a Pac-Man board (pacman_dark.svg / pacman_light.svg).
 
-Pac-Man walks the calendar row by row (left to right, then right to left),
-eating every day that had contributions; three ghosts follow a few days behind. Pure SVG/SMIL,
+Pac-Man wanders the calendar like in the arcade: he always heads for a nearby
+uneaten day (ties broken at random), eating every day that had contributions,
+while three little pixel Claudes follow a few steps behind. Pure SVG/SMIL,
 no scripts, so GitHub renders it inside the README.
 
 Usage: GITHUB_TOKEN=... python tools/pacman.py
@@ -9,6 +10,8 @@ Usage: GITHUB_TOKEN=... python tools/pacman.py
 import datetime as dt
 import json
 import os
+import random
+from collections import deque
 import urllib.request
 
 GH_USER = "Eduardo-Salvador"
@@ -17,7 +20,7 @@ BG, FG = (0x16, 0x1B, 0x22), (0xC9, 0xD1, 0xD9)
 TEXT, DIM = "#c9d1d9", "#8b949e"
 PAC = "#ffd33d"
 ORANGE = (0xFF, 0x8C, 0x42)
-GHOSTS = ["#ff7b72", "#79c0ff", "#d2a8ff"]
+GHOSTS = ["#d97757", "#e8956f", "#c4613f"]   # Claude coral shades
 LEVEL_MIX = (0.10, 0.30, 0.55, 0.80, 1.0)   # level 0 is grey, 1-4 go from dark to bright orange
 LEVELS = {"NONE": 0, "FIRST_QUARTILE": 1, "SECOND_QUARTILE": 2, "THIRD_QUARTILE": 3, "FOURTH_QUARTILE": 4}
 
@@ -25,7 +28,7 @@ W = 985
 MARGIN, LABEL_COL = 18, 34
 CELL, PITCH = 13, 17
 TOP = 58                    # header + month labels
-STEP = 0.10                 # seconds per day
+STEP = 0.11                 # seconds per step
 INTRO, OUTRO = 1.2, 1.8
 GHOST_LAG = (6, 11, 16)     # days behind Pac-Man
 
@@ -58,20 +61,63 @@ def pacman_paths(r):
     return open_, shut
 
 
-def ghost_path(r):
-    # rounded head, wavy skirt, centred on 0,0
-    return (f"M{-r},{r} L{-r},0 A{r},{r} 0 0,1 {r},0 L{r},{r} "
-            f"L{r*0.5},{r*0.6} L0,{r} L{-r*0.5},{r*0.6} Z")
+CLAUDE = [          # pixel sprite, "#" = body, "o" = eye
+    ".#######.",
+    ".#o###o#.",
+    "#########",
+    ".#######.",
+    ".#.#.#.#.",
+]
+U = 2.2             # px per sprite pixel
+
+
+def sprite(char):
+    h, w = len(CLAUDE), len(CLAUDE[0])
+    d = "".join(f"M{(x - w / 2) * U:.1f},{(y - h / 2) * U:.1f}h{U}v{U}h{-U}z"
+                for y, row in enumerate(CLAUDE) for x, c in enumerate(row) if c == char)
+    return d
+
+
+def walk(cells, food, seed):
+    """Arcade-like route: BFS to the nearest uneaten food, random among ties."""
+    rnd = random.Random(seed)
+    start = min(cells)
+    path, left = [start], set(food) - {start}
+    pos = start
+    while left:
+        prev, q, found = {pos: None}, deque([pos]), []
+        while q and not found:
+            for _ in range(len(q)):
+                c = q.popleft()
+                nb = [(c[0] + 1, c[1]), (c[0] - 1, c[1]), (c[0], c[1] + 1), (c[0], c[1] - 1)]
+                rnd.shuffle(nb)
+                for v in nb:
+                    if v in cells and v not in prev:
+                        prev[v] = c
+                        q.append(v)
+                        if v in left:
+                            found.append(v)
+        goal = rnd.choice(found)
+        seg = []
+        while goal != pos:
+            seg.append(goal)
+            goal = prev[goal]
+        path += seg[::-1]
+        pos = path[-1]
+        left -= set(seg)
+    return path
 
 
 def build():
     total, weeks = calendar()
     exists = {(w, d["weekday"]) for w, wk in enumerate(weeks) for d in wk["contributionDays"]}
-    order = []          # (week, weekday) in Pac-Man's walking order: snake through the rows
-    for d in range(7):
-        cols = range(len(weeks)) if d % 2 == 0 else range(len(weeks) - 1, -1, -1)
-        order += [(w, d) for w in cols if (w, d) in exists]
+    level = {(w, d["weekday"]): LEVELS.get(d["contributionLevel"], 0) for w, wk in enumerate(weeks) for d in wk["contributionDays"]}
+    food = [c for c in exists if level[c]]
+    order = walk(exists, food, seed=dt.date.today().toordinal())   # new route every day
     n = len(order)
+    eat = {}
+    for i, c in enumerate(order):
+        eat.setdefault(c, i)
     T = INTRO + n * STEP + OUTRO
     kt = lambda t: f"{min(max(t / T, 0), 1):.5f}"
 
@@ -91,26 +137,21 @@ def build():
         o.append(f'<text x="{MARGIN}" y="{cell_xy(0, d)[1] + 10}" fill="{DIM}" font-size="11">{lab}</text>')
 
     # days: each one vanishes when Pac-Man reaches it and comes back at the reset
-    level = {}
-    for w, wk in enumerate(weeks):
-        for day in wk["contributionDays"]:
-            level[(w, day["weekday"])] = LEVELS.get(day["contributionLevel"], 0)
-    for i, (w, d) in enumerate(order):
+    for (w, d) in sorted(exists):
         x, y = cell_xy(w, d)
         lv = level[(w, d)]
         o.append(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="3" fill="{mix(LEVEL_MIX[0])}"/>')
         if lv:  # only days with contributions are food
-            t = INTRO + i * STEP + STEP * 0.5
+            t = INTRO + eat[(w, d)] * STEP + STEP * 0.5
             o.append(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="3" fill="{level_color(lv)}">'
                      f'<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;{kt(t)};{kt(t + 0.001)};1" dur="{T:.2f}s" repeatCount="indefinite"/></rect>')
 
     # header counts up like an arcade score as each day is eaten
     count = {(w, d["weekday"]): d["contributionCount"] for w, wk in enumerate(weeks) for d in wk["contributionDays"]}
     events, acc = [(0.0, 0)], 0
-    for i, cell in enumerate(order):
-        if count[cell]:
-            acc += count[cell]
-            events.append((INTRO + i * STEP + STEP * 0.5, acc))
+    for cell in sorted((c for c in exists if count[c]), key=eat.get):
+        acc += count[cell]
+        events.append((INTRO + eat[cell] * STEP + STEP * 0.5, acc))
     for j, (t0, val) in enumerate(events):
         t1 = events[j + 1][0] if j + 1 < len(events) else T
         if j == 0:
@@ -140,19 +181,20 @@ def build():
         keys = ";".join(kt(t) for t in times)
         return f'<animateTransform attributeName="transform" type="translate" values="{vals}" keyTimes="{keys}" dur="{T:.2f}s" repeatCount="indefinite"/>'
 
-    # Pac-Man faces right on even rows, left on odd ones, down while changing row
-    rots, rkeys = [], []
+    # Pac-Man faces the direction of his next step
+    rots, rkeys, ang = [], [], 0
     for i, (w, d) in enumerate(order):
         nxt = order[i + 1] if i + 1 < n else (w, d)
-        ang = 90 if nxt[1] != d else (0 if d % 2 == 0 else 180)
+        dx, dy = nxt[0] - w, nxt[1] - d
+        ang = {(1, 0): 0, (-1, 0): 180, (0, 1): 90, (0, -1): -90}.get((dx, dy), ang)
         rots.append(str(ang)); rkeys.append(kt(INTRO + i * STEP))
     rkeys[0] = "0"
     rot = (f'<animateTransform attributeName="transform" type="rotate" values="{";".join(rots)}" keyTimes="{";".join(rkeys)}" '
            f'calcMode="discrete" dur="{T:.2f}s" repeatCount="indefinite"/>')
 
     for g, lag in reversed(list(zip(GHOSTS, GHOST_LAG))):
-        o.append(f'<g>{motion(lag)}<path d="{ghost_path(6.5)}" fill="{g}"/>'
-                 f'<circle cx="-2.4" cy="-0.5" r="1.6" fill="#fff"/><circle cx="2.4" cy="-0.5" r="1.6" fill="#fff"/></g>')
+        o.append(f'<g>{motion(lag)}<path d="{sprite("#")}" fill="{g}" shape-rendering="crispEdges"/>'
+                 f'<path d="{sprite("o")}" fill="#161b22" shape-rendering="crispEdges"/></g>')
 
     op, sh = pacman_paths(8)
     o.append(f'<g>{motion(0)}<g>{rot}'

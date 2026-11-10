@@ -120,7 +120,7 @@ INFO = [
     ("Kernel", "Full Stack Software Engineer"),
     None,
     ("Languages", "Java, Kotlin, Python"),
-    ("Backend", "Spring Boot, Spring AI, Node.js"),
+    ("Backend", "Spring Boot, Spring AI"),
     ("Frontend", "Angular"),
     ("Mobile", "Android, Jetpack Compose"),
     ("Data", "SQL, NoSQL, Vector DBs"),

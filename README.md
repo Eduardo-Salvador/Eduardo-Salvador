@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=java,kotlin,spring,maven,angular,androidstudio,nodejs,py,postgres,mysql,mongodb,docker,git,github&theme=dark" alt="Tech stack" />
+  <img src="https://skillicons.dev/icons?i=java,kotlin,spring,maven,angular,androidstudio,py,postgres,mysql,mongodb,docker,git,github&theme=dark" alt="Tech stack" />
 </p>
 
 <p align="center">

@@ -9,6 +9,7 @@ Usage: GITHUB_TOKEN=... python tools/pacman.py
 """
 import datetime as dt
 import json
+import base64
 import os
 import re
 import random
@@ -101,20 +102,14 @@ SPRITES = {
 U = 2.0             # px per sprite pixel
 
 
-LOGOS = {  # real logos (assets/logos), drawn on a small dark badge
-    "openai": "#f0f6fc", "deepseek": None, "java": None,
-}
-LOGO_SIZE = 16
+LOGOS = ("openai", "deepseek", "duke")   # transparent PNGs in assets/logos
+LOGO_SIZE = 20
 
 
 def logo(name):
-    raw = open(f"assets/logos/{name}.svg", encoding="utf-8").read()
-    vb = re.search(r'viewBox="([^"]+)"', raw).group(1)
-    inner = re.sub(r"<title>.*?</title>", "", raw[raw.index(">") + 1: raw.rindex("</svg>")])
-    fill = f' fill="{LOGOS[name]}"' if LOGOS[name] else ""
+    data = base64.b64encode(open(f"assets/logos/{name}.png", "rb").read()).decode()
     h = LOGO_SIZE / 2
-    return (f'<circle r="{h + 2}" fill="#0d1117" stroke="#30363d"/>'
-            f'<svg x="{-h + 1}" y="{-h + 1}" width="{LOGO_SIZE - 2}" height="{LOGO_SIZE - 2}" viewBox="{vb}"{fill}>{inner}</svg>')
+    return f'<image x="{-h}" y="{-h}" width="{LOGO_SIZE}" height="{LOGO_SIZE}" href="data:image/png;base64,{data}"/>'
 
 
 def sprite(name):
@@ -246,7 +241,7 @@ def build():
     rot = (f'<animateTransform attributeName="transform" type="rotate" values="{";".join(rots)}" keyTimes="{";".join(rkeys)}" '
            f'calcMode="discrete" dur="{T:.2f}s" repeatCount="indefinite"/>')
 
-    for name, lag in reversed(list(zip(("claude", "openai", "deepseek", "java"), GHOST_LAG))):
+    for name, lag in reversed(list(zip(("claude", "openai", "deepseek", "duke"), GHOST_LAG))):
         o.append(f'<g>{motion(lag)}{sprite(name)}</g>')
 
     op, sh = pacman_paths(8)

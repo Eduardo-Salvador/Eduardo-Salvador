@@ -1,7 +1,7 @@
 """Renders the contribution calendar as a Pac-Man board (pacman_dark.svg / pacman_light.svg).
 
-Pac-Man walks the calendar week by week (down one column, up the next), eating
-each day as he passes; three ghosts follow a few days behind. Pure SVG/SMIL,
+Pac-Man walks the calendar row by row (left to right, then right to left),
+eating every day that had contributions; three ghosts follow a few days behind. Pure SVG/SMIL,
 no scripts, so GitHub renders it inside the README.
 
 Usage: GITHUB_TOKEN=... python tools/pacman.py
@@ -15,22 +15,23 @@ GH_USER = "Eduardo-Salvador"
 
 BG, FG = (0x16, 0x1B, 0x22), (0xC9, 0xD1, 0xD9)
 TEXT, DIM = "#c9d1d9", "#8b949e"
-PAC = "#ffa657"
+PAC = "#ffd33d"
+ORANGE = (0xFF, 0x8C, 0x42)
 GHOSTS = ["#ff7b72", "#79c0ff", "#d2a8ff"]
-LEVEL_MIX = (0.10, 0.30, 0.50, 0.72, 1.0)
+LEVEL_MIX = (0.10, 0.30, 0.55, 0.80, 1.0)   # level 0 is grey, 1-4 go from dark to bright orange
 LEVELS = {"NONE": 0, "FIRST_QUARTILE": 1, "SECOND_QUARTILE": 2, "THIRD_QUARTILE": 3, "FOURTH_QUARTILE": 4}
 
 W = 985
 MARGIN, LABEL_COL = 18, 34
 CELL, PITCH = 13, 17
 TOP = 58                    # header + month labels
-STEP = 0.045                # seconds per day
+STEP = 0.10                 # seconds per day
 INTRO, OUTRO = 1.2, 1.8
 GHOST_LAG = (6, 11, 16)     # days behind Pac-Man
 
 
 def calendar():
-    q = f'{{user(login:"{GH_USER}"){{contributionsCollection{{contributionCalendar{{totalContributions weeks{{contributionDays{{date weekday contributionLevel}}}}}}}}}}}}'
+    q = f'{{user(login:"{GH_USER}"){{contributionsCollection{{contributionCalendar{{totalContributions weeks{{contributionDays{{date weekday contributionLevel contributionCount}}}}}}}}}}}}'
     req = urllib.request.Request("https://api.github.com/graphql", data=json.dumps({"query": q}).encode(),
                                  headers={"Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}", "User-Agent": "profile-readme"})
     with urllib.request.urlopen(req, timeout=30) as r:
@@ -38,8 +39,12 @@ def calendar():
     return cal["totalContributions"], cal["weeks"]
 
 
-def mix(t):
-    return "#%02x%02x%02x" % tuple(round(b + (f - b) * t) for b, f in zip(BG, FG))
+def mix(t, to=FG):
+    return "#%02x%02x%02x" % tuple(round(b + (f - b) * t) for b, f in zip(BG, to))
+
+
+def level_color(lv):
+    return mix(LEVEL_MIX[0]) if lv == 0 else mix(LEVEL_MIX[lv], ORANGE)
 
 
 def cell_xy(w, d):
@@ -61,12 +66,11 @@ def ghost_path(r):
 
 def build():
     total, weeks = calendar()
-    order = []          # (week, weekday) in Pac-Man's walking order
-    for w, wk in enumerate(weeks):
-        days = sorted(wk["contributionDays"], key=lambda d: d["weekday"])
-        if w % 2:
-            days = days[::-1]
-        order += [(w, d["weekday"]) for d in days]
+    exists = {(w, d["weekday"]) for w, wk in enumerate(weeks) for d in wk["contributionDays"]}
+    order = []          # (week, weekday) in Pac-Man's walking order: snake through the rows
+    for d in range(7):
+        cols = range(len(weeks)) if d % 2 == 0 else range(len(weeks) - 1, -1, -1)
+        order += [(w, d) for w in cols if (w, d) in exists]
     n = len(order)
     T = INTRO + n * STEP + OUTRO
     kt = lambda t: f"{min(max(t / T, 0), 1):.5f}"
@@ -74,7 +78,7 @@ def build():
     H = TOP + 7 * PITCH + 38
     o = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" font-family="ConsolasFallback,Consolas,monospace">',
          f'<rect width="{W}" height="{H}" rx="12" fill="{mix(0)}"/>',
-         f'<text x="{MARGIN}" y="26" fill="{TEXT}" font-size="14">{total:,} contributions in the last year</text>']
+         ]
 
     # month labels
     last = None
@@ -93,16 +97,37 @@ def build():
             level[(w, day["weekday"])] = LEVELS.get(day["contributionLevel"], 0)
     for i, (w, d) in enumerate(order):
         x, y = cell_xy(w, d)
-        t = INTRO + i * STEP + STEP * 0.5
-        o.append(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="3" fill="{mix(LEVEL_MIX[level[(w, d)]])}">'
-                 f'<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;{kt(t)};{kt(t + 0.001)};1" dur="{T:.2f}s" repeatCount="indefinite"/></rect>')
+        lv = level[(w, d)]
+        o.append(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="3" fill="{mix(LEVEL_MIX[0])}"/>')
+        if lv:  # only days with contributions are food
+            t = INTRO + i * STEP + STEP * 0.5
+            o.append(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="3" fill="{level_color(lv)}">'
+                     f'<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;{kt(t)};{kt(t + 0.001)};1" dur="{T:.2f}s" repeatCount="indefinite"/></rect>')
+
+    # header counts up like an arcade score as each day is eaten
+    count = {(w, d["weekday"]): d["contributionCount"] for w, wk in enumerate(weeks) for d in wk["contributionDays"]}
+    events, acc = [(0.0, 0)], 0
+    for i, cell in enumerate(order):
+        if count[cell]:
+            acc += count[cell]
+            events.append((INTRO + i * STEP + STEP * 0.5, acc))
+    for j, (t0, val) in enumerate(events):
+        t1 = events[j + 1][0] if j + 1 < len(events) else T
+        if j == 0:
+            vis, keys = "1;0", f"0;{kt(t1)}"
+        elif j + 1 == len(events):
+            vis, keys = "0;1", f"0;{kt(t0)}"
+        else:
+            vis, keys = "0;1;0", f"0;{kt(t0)};{kt(t1)}"
+        o.append(f'<text x="{MARGIN}" y="26" fill="{TEXT}" font-size="14" opacity="0">{val:,} contributions in the last year'
+                 f'<animate attributeName="opacity" values="{vis}" keyTimes="{keys}" calcMode="discrete" dur="{T:.2f}s" repeatCount="indefinite"/></text>')
 
     # legend
     lx = W - MARGIN - 5 * PITCH - 40
     ly = TOP + 7 * PITCH + 14
     o.append(f'<text x="{lx - 34}" y="{ly + 10}" fill="{DIM}" font-size="11">Less</text>')
     for k, t in enumerate(LEVEL_MIX):
-        o.append(f'<rect x="{lx + k * PITCH}" y="{ly}" width="{CELL}" height="{CELL}" rx="3" fill="{mix(t)}"/>')
+        o.append(f'<rect x="{lx + k * PITCH}" y="{ly}" width="{CELL}" height="{CELL}" rx="3" fill="{level_color(k)}"/>')
     o.append(f'<text x="{lx + 5 * PITCH + 4}" y="{ly + 10}" fill="{DIM}" font-size="11">More</text>')
 
     # movement: one translate keyframe per day, shared by Pac-Man and (delayed) ghosts
@@ -115,11 +140,11 @@ def build():
         keys = ";".join(kt(t) for t in times)
         return f'<animateTransform attributeName="transform" type="translate" values="{vals}" keyTimes="{keys}" dur="{T:.2f}s" repeatCount="indefinite"/>'
 
-    # Pac-Man faces down on even weeks, up on odd ones, right while changing column
+    # Pac-Man faces right on even rows, left on odd ones, down while changing row
     rots, rkeys = [], []
     for i, (w, d) in enumerate(order):
         nxt = order[i + 1] if i + 1 < n else (w, d)
-        ang = 0 if nxt[0] != w else (90 if w % 2 == 0 else -90)
+        ang = 90 if nxt[1] != d else (0 if d % 2 == 0 else 180)
         rots.append(str(ang)); rkeys.append(kt(INTRO + i * STEP))
     rkeys[0] = "0"
     rot = (f'<animateTransform attributeName="transform" type="rotate" values="{";".join(rots)}" keyTimes="{";".join(rkeys)}" '

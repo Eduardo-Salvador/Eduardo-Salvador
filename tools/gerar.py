@@ -117,27 +117,18 @@ INFO = [
     ("Uptime", uptime()),
     ("Host", "Robert Bosch"),
     ("Founder", "Corvo Ltda"),
-    ("Kernel", "Software Engineer"),
+    ("Kernel", "Full Stack Software Engineer"),
     ("IDE", "IntelliJ, VSCode"),
     None,
-    ("Languages.Programming", "Java, Kotlin, TypeScript, JS, Python"),
-    ("Languages.Computer", "HTML, CSS, YAML, JSON"),
-    ("Languages.Data", "SQL, NoSQL, Vector DBs"),
-    ("Languages.APIs", "REST, GraphQL, gRPC, WebSocket"),
-    ("Languages.Real", "Portuguese, English, Spanish"),
+    ("Languages", "Java, Kotlin, TypeScript, Python"),
+    ("Backend", "Spring Boot, Spring AI, Node.js"),
+    ("Frontend", "Angular, React"),
+    ("Mobile", "Android, Jetpack Compose"),
+    ("Data", "SQL, NoSQL, Vector DBs"),
+    ("Focus.AI", "Agents, MCP, RAG"),
     None,
-    ("Frameworks.Spring", "Boot, Web, Data, Security, AI"),
-    ("Frameworks.Backend", "Node.js, Hibernate/JPA"),
-    ("Frameworks.Frontend", "Angular, React"),
-    ("Frameworks.Mobile", "Jetpack Compose"),
-    None,
-    ("Focus.AI", "Agents, MCP, Harness, LLM Automation"),
-    ("Focus.AI.Eng", "RAG, Vector DBs, Fine-Tuning"),
-    ("Focus.Web", "Java Web, REST APIs, Microservices"),
-    ("Focus.Mobile", "Native Android with Kotlin"),
     ("Hobbies", "Books, Electronics, Cars"),
     "- Contact",
-    ("Email", "eduardo.salvador.gs@gmail.com"),
     ("LinkedIn", "in/eduardo-salvador-306480218"),
     ("Portfolio", "salvadordev.com.br"),
     "- GitHub Stats",
@@ -145,7 +136,6 @@ INFO = [
     ("Commits", f"{S['commits']}  {{Followers: {S['followers']}}}"),
     ("Pull Requests", f"{S['prs']}  {{Merged: {S['merged']}}}"),
     ("Open Source", f"{S['oss_prs']} PRs  {{Projects: {S['oss_repos']}}}"),
-    ("Private Contributions", f"{S['priv']}"),
     ("Lines of Code", "LOC"),
 ]
 
@@ -280,6 +270,6 @@ def botao(theme, nome):
 
 for t in ("dark", "light"):
     open(f"{t}_mode.svg", "w", encoding="utf-8").write(svg("dark"))
-    for n in ("portfolio", "linkedin", "email"):
+    for n in ("portfolio", "linkedin"):
         open(f"link_{n}_{t}.svg", "w", encoding="utf-8").write(botao("dark", n))
 print("ok", S)

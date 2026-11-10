@@ -241,11 +241,60 @@ def svg(theme):
             s.append(f'<tspan x="{x2}" y="{y}">. </tspan><tspan class="k">{k}</tspan>:<tspan class="d"> {dots} </tspan>'
                      f'<tspan class="v">{fmt(S["loc"])}</tspan> ( <tspan class="a">{fmt(S["add"])}++</tspan>, <tspan class="r">{fmt(S["rem"])}--</tspan> )')
         elif t == "prompt":
-            s.append(f'<tspan x="{x2}" y="{y + 10}" class="t">&gt;</tspan>')
+            py = y + 10
+            s.append(f'<tspan x="{x2}" y="{py}" class="t">&gt;</tspan>')
         else:
             s.append(f'<tspan x="{x2}" y="{y}">{html.escape(d)}</tspan>')
-    s.append("</text></svg>")
+    s.append("</text>")
+    s += terminal(x2 + 18, py, c)
+    s.append("</svg>")
     return chr(10).join(s)
+
+
+# "Enjoy the journey" typed in a different shell/language each time, then erased
+COMANDOS = [
+    'echo "Enjoy the journey"',                      # bash
+    'Write-Host "Enjoy the journey"',                # PowerShell
+    'System.out.println("Enjoy the journey");',      # Java
+    'println("Enjoy the journey")',                  # Kotlin
+    'print("Enjoy the journey")',                    # Python
+    'console.log("Enjoy the journey");',             # JavaScript
+]
+CW = 8.25                    # largura de um caractere a 15px (Consolas)
+TYPE, ERASE, HOLD, GAP = 0.07, 0.025, 1.6, 0.35
+
+
+def terminal(x, y, c):
+    """Texto digitado e apagado: cada comando e revelado por um clipPath cuja largura cresce
+    caractere a caractere (calcMode discrete); um cursor acompanha a borda."""
+    janelas, t = [], 0.0
+    for cmd in COMANDOS:
+        dur = len(cmd) * TYPE + HOLD + len(cmd) * ERASE + GAP
+        janelas.append((t, cmd)); t += dur
+    total = t
+    k = lambda v: f"{min(max(v / total, 0), 1):.5f}"
+    out, cur_vals, cur_keys = [], ["0"], ["0"]
+    for i, (t0, cmd) in enumerate(janelas):
+        n = len(cmd)
+        vals, keys = ["0"], ["0"]
+        for j in range(n + 1):                                   # digitando
+            vals.append(f"{j * CW:.1f}"); keys.append(k(t0 + j * TYPE))
+        t1 = t0 + n * TYPE + HOLD
+        for j in range(n, -1, -1):                               # apagando
+            vals.append(f"{j * CW:.1f}"); keys.append(k(t1 + (n - j) * ERASE))
+        vals.append("0"); keys.append("1")
+        cur_vals += vals[1:-1]; cur_keys += keys[1:-1]
+        out.append(f'<clipPath id="tc{i}"><rect x="{x}" y="{y - 14}" height="20" width="0">'
+                   f'<animate attributeName="width" values="{";".join(vals)}" keyTimes="{";".join(keys)}" '
+                   f'calcMode="discrete" dur="{total:.2f}s" repeatCount="indefinite"/></rect></clipPath>')
+        out.append(f'<text x="{x}" y="{y}" fill="{c["fg"]}" clip-path="url(#tc{i})">{html.escape(cmd)}</text>')
+    cur_vals.append("0"); cur_keys.append("1")
+    # cursor: segue a ponta do texto e pisca
+    out.append(f'<rect x="{x}" y="{y - 12}" width="8" height="15" fill="{c["title"]}">'
+               f'<animateTransform attributeName="transform" type="translate" values="{";".join(v + ",0" for v in cur_vals)}" '
+               f'keyTimes="{";".join(cur_keys)}" calcMode="discrete" dur="{total:.2f}s" repeatCount="indefinite"/>'
+               f'<animate attributeName="opacity" values="1;0" dur="1s" calcMode="discrete" repeatCount="indefinite"/></rect>')
+    return out
 
 
 ICONES = {  # icones simples 22x22

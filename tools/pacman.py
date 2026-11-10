@@ -10,6 +10,7 @@ Usage: GITHUB_TOKEN=... python tools/pacman.py
 import datetime as dt
 import json
 import os
+import re
 import random
 from collections import deque
 import urllib.request
@@ -28,9 +29,9 @@ W = 985
 MARGIN, LABEL_COL = 18, 34
 CELL, PITCH = 13, 17
 TOP = 58                    # header + month labels
-STEP = 0.11                 # seconds per step
+STEP = 0.18                 # seconds per step
 INTRO, OUTRO = 1.2, 0.4      # restarts right after Pac-Man finishes
-GHOST_LAG = (5, 10, 15, 20)  # steps behind Pac-Man
+GHOST_LAG = (4, 7, 10, 13)   # steps behind Pac-Man
 
 
 def calendar():
@@ -100,7 +101,25 @@ SPRITES = {
 U = 2.0             # px per sprite pixel
 
 
+LOGOS = {  # real logos (assets/logos), drawn on a small dark badge
+    "openai": "#f0f6fc", "deepseek": None, "java": None,
+}
+LOGO_SIZE = 16
+
+
+def logo(name):
+    raw = open(f"assets/logos/{name}.svg", encoding="utf-8").read()
+    vb = re.search(r'viewBox="([^"]+)"', raw).group(1)
+    inner = re.sub(r"<title>.*?</title>", "", raw[raw.index(">") + 1: raw.rindex("</svg>")])
+    fill = f' fill="{LOGOS[name]}"' if LOGOS[name] else ""
+    h = LOGO_SIZE / 2
+    return (f'<circle r="{h + 2}" fill="#0d1117" stroke="#30363d"/>'
+            f'<svg x="{-h + 1}" y="{-h + 1}" width="{LOGO_SIZE - 2}" height="{LOGO_SIZE - 2}" viewBox="{vb}"{fill}>{inner}</svg>')
+
+
 def sprite(name):
+    if name in LOGOS:
+        return logo(name)
     rows, colors = SPRITES[name]
     h, w = len(rows), len(rows[0])
     out = []
@@ -227,7 +246,7 @@ def build():
     rot = (f'<animateTransform attributeName="transform" type="rotate" values="{";".join(rots)}" keyTimes="{";".join(rkeys)}" '
            f'calcMode="discrete" dur="{T:.2f}s" repeatCount="indefinite"/>')
 
-    for name, lag in reversed(list(zip(("claude", "openai", "deepseek", "duke"), GHOST_LAG))):
+    for name, lag in reversed(list(zip(("claude", "openai", "deepseek", "java"), GHOST_LAG))):
         o.append(f'<g>{motion(lag)}{sprite(name)}</g>')
 
     op, sh = pacman_paths(8)

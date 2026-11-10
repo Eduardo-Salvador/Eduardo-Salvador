@@ -20,7 +20,7 @@ BG, FG = (0x16, 0x1B, 0x22), (0xC9, 0xD1, 0xD9)
 TEXT, DIM = "#c9d1d9", "#8b949e"
 PAC = "#ffd33d"
 ORANGE = (0xFF, 0x8C, 0x42)
-GHOSTS = ["#d97757", "#e8956f", "#c4613f"]   # Claude coral shades
+
 LEVEL_MIX = (0.10, 0.30, 0.55, 0.80, 1.0)   # level 0 is grey, 1-4 go from dark to bright orange
 LEVELS = {"NONE": 0, "FIRST_QUARTILE": 1, "SECOND_QUARTILE": 2, "THIRD_QUARTILE": 3, "FOURTH_QUARTILE": 4}
 
@@ -29,8 +29,8 @@ MARGIN, LABEL_COL = 18, 34
 CELL, PITCH = 13, 17
 TOP = 58                    # header + month labels
 STEP = 0.11                 # seconds per step
-INTRO, OUTRO = 1.2, 1.8
-GHOST_LAG = (6, 11, 16)     # days behind Pac-Man
+INTRO, OUTRO = 1.2, 0.4      # restarts right after Pac-Man finishes
+GHOST_LAG = (5, 10, 15, 20)  # steps behind Pac-Man
 
 
 def calendar():
@@ -61,21 +61,54 @@ def pacman_paths(r):
     return open_, shut
 
 
-CLAUDE = [          # pixel sprite, "#" = body, "o" = eye
-    ".#######.",
-    ".#o###o#.",
-    "#########",
-    ".#######.",
-    ".#.#.#.#.",
-]
-U = 2.2             # px per sprite pixel
+# pixel "ghosts": AI and Java mascots. Each char is a colour, "." is transparent.
+SPRITES = {
+    "claude": ([
+        ".#######.",
+        ".#o###o#.",
+        "#########",
+        ".#######.",
+        ".#.#.#.#.",
+    ], {"#": "#d97757", "o": "#161b22"}),
+    "openai": ([
+        "...www...",
+        ".ww...ww.",
+        "w..www..w",
+        "w.w...w.w",
+        "w..www..w",
+        ".ww...ww.",
+        "...www...",
+    ], {"w": "#f0f6fc"}),
+    "deepseek": ([
+        "......b..",
+        ".bbbb..b.",
+        "bbbbbbbb.",
+        "bwbbbbbbb",
+        "bbbbbbbb.",
+        ".lllll...",
+    ], {"b": "#4d6bfe", "w": "#f0f6fc", "l": "#8fa4ff"}),
+    "duke": ([
+        "...k...",
+        "..kkk..",
+        ".kwwwk.",
+        ".kwrwk.",
+        "kkwwwkk",
+        ".kkkkk.",
+        ".k...k.",
+    ], {"k": "#6e7681", "w": "#f0f6fc", "r": "#e11d2e"}),
+}
+U = 2.0             # px per sprite pixel
 
 
-def sprite(char):
-    h, w = len(CLAUDE), len(CLAUDE[0])
-    d = "".join(f"M{(x - w / 2) * U:.1f},{(y - h / 2) * U:.1f}h{U}v{U}h{-U}z"
-                for y, row in enumerate(CLAUDE) for x, c in enumerate(row) if c == char)
-    return d
+def sprite(name):
+    rows, colors = SPRITES[name]
+    h, w = len(rows), len(rows[0])
+    out = []
+    for ch, color in colors.items():
+        d = "".join(f"M{(x - w / 2) * U:.1f},{(y - h / 2) * U:.1f}h{U}v{U}h{-U}z"
+                    for y, row in enumerate(rows) for x, c in enumerate(row) if c == ch)
+        out.append(f'<path d="{d}" fill="{color}" shape-rendering="crispEdges"/>')
+    return "".join(out)
 
 
 def walk(cells, food, seed):
@@ -175,8 +208,10 @@ def build():
     centers = [(cell_xy(w, d)[0] + CELL / 2, cell_xy(w, d)[1] + CELL / 2) for w, d in order]
 
     def motion(lag):
-        pts = [centers[0]] * (lag + 1) + centers + [centers[-1]]
-        times = [0, INTRO] + [INTRO + i * STEP for i in range(1, len(pts) - 2)] + [T]
+        pts = [centers[0]] * (lag + 1) + centers
+        times = [0, INTRO] + [INTRO + i * STEP for i in range(1, len(pts) - 1)]
+        keep = [i for i, t in enumerate(times) if t < T]
+        pts, times = [pts[i] for i in keep] + [pts[keep[-1]]], [times[i] for i in keep] + [T]
         vals = ";".join(f"{x:.1f},{y:.1f}" for x, y in pts[:len(times)])
         keys = ";".join(kt(t) for t in times)
         return f'<animateTransform attributeName="transform" type="translate" values="{vals}" keyTimes="{keys}" dur="{T:.2f}s" repeatCount="indefinite"/>'
@@ -192,9 +227,8 @@ def build():
     rot = (f'<animateTransform attributeName="transform" type="rotate" values="{";".join(rots)}" keyTimes="{";".join(rkeys)}" '
            f'calcMode="discrete" dur="{T:.2f}s" repeatCount="indefinite"/>')
 
-    for g, lag in reversed(list(zip(GHOSTS, GHOST_LAG))):
-        o.append(f'<g>{motion(lag)}<path d="{sprite("#")}" fill="{g}" shape-rendering="crispEdges"/>'
-                 f'<path d="{sprite("o")}" fill="#161b22" shape-rendering="crispEdges"/></g>')
+    for name, lag in reversed(list(zip(("claude", "openai", "deepseek", "duke"), GHOST_LAG))):
+        o.append(f'<g>{motion(lag)}{sprite(name)}</g>')
 
     op, sh = pacman_paths(8)
     o.append(f'<g>{motion(0)}<g>{rot}'

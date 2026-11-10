@@ -258,7 +258,7 @@ COMANDOS = [
     'System.out.println("Enjoy the journey");',      # Java
     'println("Enjoy the journey")',                  # Kotlin
     'print("Enjoy the journey")',                    # Python
-    'console.log("Enjoy the journey");',             # JavaScript
+    'Hey AI, please print "Enjoy the journey"',      # prompt
 ]
 CW = 8.25                    # largura de um caractere a 15px (Consolas)
 TYPE, ERASE, HOLD, GAP = 0.07, 0.025, 1.6, 0.35
@@ -309,11 +309,13 @@ def botao(theme, nome):
     c = TEMAS[theme]
     cor = CORES[nome][0 if theme == "dark" else 1]
     ic = ICONES[nome].format(c=cor, bg=c["bg"])
+    largura = 22 + 12 + len(nome) * 9.25 - 1      # icone + espaco + texto (8.25px + 1px de letter-spacing)
+    x0 = 160 - largura / 2                         # centraliza o conjunto icone + texto
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="320" height="48" font-family="Consolas,monospace">'
             f'<rect x="1" y="1" width="318" height="46" rx="6" fill="{c["bg"]}" stroke="{c["dots"]}" stroke-opacity=".5"/>'
             f'<rect x="1" y="44" width="318" height="3" fill="{cor}"/>'
-            f'<g transform="translate({160 - len(nome)*5.2 - 20},12)">{ic}</g>'
-            f'<text x="{160 + 14}" y="29" text-anchor="middle" fill="{c["fg"]}" font-size="15" letter-spacing="1">{nome.upper()}</text></svg>')
+            f'<g transform="translate({x0:.1f},12)">{ic}</g>'
+            f'<text x="{x0 + 34:.1f}" y="29" fill="{c["fg"]}" font-size="15" letter-spacing="1">{nome.upper()}</text></svg>')
 
 
 for t in ("dark", "light"):

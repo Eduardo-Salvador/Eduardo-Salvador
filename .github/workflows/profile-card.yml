@@ -1,4 +1,7 @@
-# Refreshes the neofetch-style profile card and the Pac-Man board once a day.
+# Regenerates the profile card, link buttons and Pac-Man board once a day.
+#
+# The SVGs are force-pushed as a single commit to the `output` branch, so main
+# only holds hand-written changes and its history never grows from refreshes.
 name: Update Profile Card
 
 on:
@@ -35,7 +38,7 @@ jobs:
       - name: Rebuild the card and link buttons
         timeout-minutes: 15
         env:
-          # PAT with repo + read:user for private contributions; falls back to public data.
+          # PAT with repo + read:user for private repos; falls back to public data.
           GITHUB_TOKEN: ${{ secrets.PROFILE_TOKEN || secrets.GITHUB_TOKEN }}
         run: python tools/gerar.py
 
@@ -44,13 +47,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PROFILE_TOKEN || secrets.GITHUB_TOKEN }}
         run: python tools/pacman.py
 
-      - name: Commit the regenerated SVGs
+      - name: Publish SVGs to the output branch
+        env:
+          TOKEN: ${{ github.token }}
         run: |
+          mkdir out && cp *.svg out/ && cd out
+          git init -q -b output
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -- *.svg
-          if ! git diff --cached --quiet; then
-            git commit -m "chore: refresh profile card stats"
-            git pull --rebase origin main
-            git push
-          fi
+          git add .
+          git commit -q -m "chore: generated profile SVGs"
+          git push -q -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" output
